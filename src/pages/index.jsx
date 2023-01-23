@@ -22,6 +22,7 @@ const Index = () => {
             console.log(res)
             { localStorage.setItem('user', res.user.email) }
             // setData(res.user.email)
+            window.location.reload()
             window.location.assign('/profile')
         }).catch((err) => {
             console.log(err)
@@ -48,7 +49,7 @@ const Index = () => {
             <button onClick={handleSignin}>SignIn</button>
             <input autoFocus type="text" value={emailsignIn} onChange={(e) => setEmailsignIn(e.target.value)} />
             <input type="text" value={passwordsignIn} onChange={(e) => setPasswordsignIn(e.target.value)} />
-            <button onClick={handleSignOut}>SignOut</button>
+            {/* <button onClick={handleSignOut}>SignOut</button> */}
         </div>
     )
 }
