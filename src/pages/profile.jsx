@@ -13,8 +13,10 @@ const Profile = () => {
         })
     }
     return (
-        <div><h1>I AM Profile</h1>
-            <button onClick={handleSignOut}>SignOut</button></div>
+        <>
+            <h1>I AM Profile</h1>
+            <button onClick={handleSignOut}>SignOut</button>
+        </>
     )
 }
 

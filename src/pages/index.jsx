@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { app } from './firebaseConfig'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
+// import { app } from './firebaseConfig'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 const auth = getAuth();
 const Index = () => {
     const [email, setEmail] = useState('')
@@ -24,15 +24,6 @@ const Index = () => {
             // setData(res.user.email)
             window.location.reload()
             window.location.assign('/profile')
-        }).catch((err) => {
-            console.log(err)
-        })
-    }
-    const handleSignOut = () => {
-        signOut(auth).then((res) => {
-            console.log("SignOut")
-            { localStorage.removeItem('user') }
-            // setData("No User")
         }).catch((err) => {
             console.log(err)
         })
