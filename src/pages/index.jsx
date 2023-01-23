@@ -24,10 +24,10 @@ const Index = () => {
         })
     }
     const handleSignOut = () => {
-        signOut(auth.currentUser).then((res) => {
-            { localStorage.removeItem('email', email) }
-            console.log(res)
-            setData(res.user.email)
+        signOut(auth).then((res) => {
+            console.log("SignOut")
+            { localStorage.removeItem('user') }
+            setData("No User")
         }).catch((err) => {
             console.log(err)
         })
@@ -37,7 +37,8 @@ const Index = () => {
             {/* <input autoFocus type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
             <input type="text" value={password} onChange={(e) => setPassword(e.target.value)} /> */}
             <div>
-                {localStorage.getItem('email')} SignInSuccessfull
+                {localStorage.getItem('user')}
+                SignInSuccessfull
             </div>
             <button onClick={handleSignin}>Submit</button>
             <input autoFocus type="text" value={email} onChange={(e) => setEmail(e.target.value)} />
