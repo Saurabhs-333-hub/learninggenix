@@ -137,38 +137,9 @@ export default function ProjectNAvAdmin() {
             })
         })
         loading = false;
-        // const res = await addDoc(collection(db, 'pdfs'), {
-        //     pdf: [res1]
-        // })
-        // alert(res)
+        SetButtonPopup(false)
     }
-    // const updatePdf = () => {
-    //     uploadBytes(pdfRef, pdf).then((res) => {
-    //         getDownloadURL(res.ref).then((url) => {
-    //             updateDoc(collection(db, 'pdfs'), {
-    //                 pdf: url,
-    //                 title: title,
-    //                 desc: desc,
-    //                 video: '',
-    //                 image: ''
-    //             })
-    //         })
-    //         toast.success("Pdf Uploaded!!", {
-    //             position: "top-right",
-    //             autoClose: 5000,
-    //             hideProgressBar: false,
-    //             closeOnClick: true,
-    //             pauseOnHover: true,
-    //             draggable: true,
-    //             progress: undefined,
-    //             theme: "colored",
-    //         })
-    //         console.log("Document written with ID: ");
-    //         getDownloadURL(res.ref).then((url) => {
-    //             setImageList((prev) => [...prev, url])
-    //         })
-    //     })
-    // }
+
     return (
         <>
             <div className='ProjectListC'>
@@ -202,123 +173,6 @@ export default function ProjectNAvAdmin() {
                     </Card>
                     </section></section></section></Link>
                 })}
-
-                <div className='CardC'>
-
-
-                    <div className='Card'>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={ImgCard} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <div className='cardBlue'>
-                                    <p className='CardRate'>RS 1500</p>
-                                    <button className='CardButton' variant="primary">Buy Now</button>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </div>
-
-                    <div className='Card'>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={ImgCard} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <div className='cardBlue'>
-                                    <p className='CardRate'>RS 1500</p>
-                                    <button className='CardButton' variant="primary">Buy Now</button>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </div>
-
-                    <div className='Card'>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={ImgCard} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <div className='cardBlue'>
-                                    <p className='CardRate'>RS 1500</p>
-                                    <button className='CardButton' variant="primary">Buy Now</button>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </div>
-
-
-                </div>
-
-                <div className='CardC'>
-
-                    <div className='Card'>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={ImgCard} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <div className='cardBlue'>
-                                    <p className='CardRate'>RS 1500</p>
-                                    <button className='CardButton' variant="primary">Buy Now</button>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </div>
-
-                    <div className='Card'>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={ImgCard} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <div className='cardBlue'>
-                                    <p className='CardRate'>RS 1500</p>
-                                    <button className='CardButton' variant="primary">Buy Now</button>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </div>
-
-                    <div className='Card'>
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Img variant="top" src={ImgCard} />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
-                                </Card.Text>
-                                <div className='cardBlue'>
-                                    <p className='CardRate'>RS 1500</p>
-                                    <button className='CardButton' variant="primary">Buy Now</button>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    </div>
-
-
-                </div>
-                <div className='CardButtonlightC'>
-                    <button className='CardButtonlight'>Explore More</button>
-                </div>
-
 
 
             </div>
