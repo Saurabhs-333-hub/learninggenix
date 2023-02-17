@@ -3,15 +3,15 @@ import './App.css';
 import Index from './pages';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Profile from './pages/profile';
-import Register from './pages/register';
+import ProjectNAvAdmin from './pages/ProjectNAvAdmin';
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         {/* <Index /> */}
         <Routes>
-          <Route path='/' element={<Register />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/' element={<Index />} />
+          <Route path='/profile' element={<ProjectNAvAdmin />} />
         </Routes>
       </div>
     </BrowserRouter>
