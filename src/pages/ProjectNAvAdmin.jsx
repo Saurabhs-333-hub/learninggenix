@@ -7,7 +7,7 @@ import Popup from './Popup';
 import '../css/Popup.css'
 import { useState } from 'react';
 import { uuidv4 } from '@firebase/util';
-import { collection, addDoc, updateDoc, getDoc, doc, getDocs } from 'firebase/firestore'
+import { collection, addDoc, updateDoc, getDoc, doc, query, getDocs } from 'firebase/firestore'
 import { getFirestore } from 'firebase/firestore'
 import { getAuth, signOut } from 'firebase/auth';
 // import firebase from 'firebase/app'
@@ -15,6 +15,8 @@ import { getDownloadURL, listAll, ref, uploadBytes } from 'firebase/storage';
 import { storage } from './firebaseStorage';
 import { toast, ToastContainer } from 'react-toastify';
 import '../App.css'
+import { Link } from 'react-router-dom';
+
 export default function ProjectNAvAdmin() {
     const [ButtonPopup, SetButtonPopup] = useState(false);
     const [image, setImage] = useState(null)
@@ -22,17 +24,19 @@ export default function ProjectNAvAdmin() {
     const [desc, setDesc] = useState(null)
     const [video, setVideo] = useState(null)
     const [pdf, setPdf] = useState(null)
+    const [details, setDetails] = useState([])
     const [imageList, setImageList] = useState([])
     const imageListRef = ref(storage, "pdf/")
     const db = getFirestore()
     let loading = false;
     useEffect(() => {
-        listAll(imageListRef).then((res) => {
-            res.items.forEach((item) => {
-                console.log(imageListRef)
-                getDownloadURL(item).then(((url) => { setImageList((prev) => [...prev, url]) }))
-            })
-        })
+        // listAll(imageListRef).then((res) => {
+        //     res.items.forEach((item) => {
+        //         console.log(imageListRef)
+        //         getDownloadURL(item).then(((url) => { setImageList((prev) => [...prev, url]) }))
+        //     })
+        // })
+        userData()
     }, [])
     let image1 = '';
     let pdf1 = '';
@@ -42,15 +46,23 @@ export default function ProjectNAvAdmin() {
     const videoRef = ref(storage, `video/${'video' + uuidv4()}`)
     const pdfRef = ref(storage, `pdf/${'pdf' + uuidv4()}`)
     let id = []
-    let docs = getDocs(collection(db, 'pdfs'))
-    // let docRef = doc(db, 'pdfs', id)
-    // console.log(docRef)
-    docs.then((res) => {
-        console.log(res.forEach(docs => {
-            id[`"${docs.id}"`]
-            console.log(docs.id)
+    let data
+    const userData = async () => {
+        let q = query(collection(db, 'pdfs'))
+        let querySnapshot = await getDocs(q)
+        data = querySnapshot.docs.map((doc) => ({
+            ...doc.data(),
+            id: doc.id
         }))
-    })
+        console.log(data)
+        setDetails(data)
+    }
+    // querySnapshot.then((res) => {
+    //     console.log(res.forEach(querySnapshot => {
+    //         id[`"${querySnapshot.id}"`]
+    //         console.log(querySnapshot.id)
+    //     }))
+    // })
     const updateProfile = async () => {
         loading = true;
         if (image == null) {
@@ -173,6 +185,24 @@ export default function ProjectNAvAdmin() {
 
                     </div>
                 </div>
+
+                {details.map((values, id) => {
+                    return <Link to={values.pdf} key={id}><section className='CardC'><section className='Card'><section><Card style={{ width: '18rem' }}>
+                        <Card.Img variant="top" src={values.image} />
+                        <Card.Body>
+                            <Card.Title>{values.title}</Card.Title>
+                            <Card.Text>
+                                {values.desc}
+                            </Card.Text>
+                            <div className='cardBlue'>
+                                <p className='CardRate'>RS 1500</p>
+                                <button className='CardButton' variant="primary">Buy Now</button>
+                            </div>
+                        </Card.Body>
+                    </Card>
+                    </section></section></section></Link>
+                })}
+
                 <div className='CardC'>
 
 
