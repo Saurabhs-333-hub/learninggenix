@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import "../css/register.css"
-import { Link } from 'react-router-dom'
-//import "./dream.img"
-//import axios from "axios"
-// import dream from ".//dream.jpg"
-
+import { app } from './firebaseConfig'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast, ToastContainer } from 'react-toastify'
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail } from "firebase/auth";
+const auth = getAuth()
+let isLoading = false
 const Register = () => {
+    const navigate = useNavigate()
     const [user, setUser] = useState({
         name: "",
         email: "",
@@ -23,10 +25,12 @@ const Register = () => {
             [name]: value
         })
     }
-    const handleSubmit = async () => {
-        await createUserWithEmailAndPassword(auth, email, password).then((res) => {
+    const handleSubmit = async (e) => {
+        isLoading = true
+        await createUserWithEmailAndPassword(auth, user.email, user.password).then((res) => {
             console.log(res)
-
+            // alert(res)
+            localStorage.setItem('user', auth.currentUser.email)
             sendEmailVerification(auth.currentUser)
                 .then((res) => {
                     console.log(res)
@@ -50,31 +54,47 @@ const Register = () => {
                         theme: "colored",
                     })
                 });
+            navigate('/profile')
             // setData(res.user.email)
         }).catch((err) => {
-            console.log(err)
+            toast.error("Email already in use, Or not verified! (Check Your Email For Verification)", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            })
+            // console.log(err)
+            // alert('check your email', err)
         })
-    }
-    const register = (e) => {
-        // //     const{name,email,phone,password,cpassword}=user
-        // //     if(name && email && phone && password && (password===cpassword)){
-        // //         axios.post("http://localhost:3001/register",user).then((res)=>{console.log(res)
-        // //     // localStorage.setItem('token',res.data.token)
-        // // }
-        // //     )
-        // //         setUser({cpassword:'',email:'',name:'',password:'',phone:''});
-        // //     }else{
-        // //         alert("Invalid input");
-        // //     }
         e.preventDefault();
         setErr(Validate(user));
         setIsSubmit(true);
+        isLoading = false
     }
+    // const register = (e) => {
+    //     // //     const{name,email,phone,password,cpassword}=user
+    //     // //     if(name && email && phone && password && (password===cpassword)){
+    //     // //         axios.post("http://localhost:3001/register",user).then((res)=>{console.log(res)
+    //     // //     // localStorage.setItem('token',res.data.token)
+    //     // // }
+    //     // //     )
+    //     // //         setUser({cpassword:'',email:'',name:'',password:'',phone:''});
+    //     // //     }else{
+    //     // //         alert("Invalid input");
+    //     // //     }
+    //     e.preventDefault();
+    //     setErr(Validate(user));
+    //     setIsSubmit(true);
+    // }
 
     useEffect(() => {
-        console.log(formErr);
+        // console.log(formErr);
         if (Object.keys(formErr).length === 0 && isSubmit) {
-            console.log(user)
+            // console.log(user)
         }
     }, [formErr])
     const Validate = (values) => {
@@ -147,7 +167,7 @@ const Register = () => {
 
 
                     <div>
-                        <button className='btn' onClick={register}>Register</button>
+                        {isLoading ? <button className='btn' onClick={handleSubmit}>Loading...</button> : <button className='btn' onClick={handleSubmit}>Register</button>}
                     </div>
                     <div>or</div>
                     <div>
@@ -160,6 +180,16 @@ const Register = () => {
                     {/* <img src={dream} /> */}
                 </div>
             </div>
+            <ToastContainer position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={true}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored" />
         </>
     )
 }
